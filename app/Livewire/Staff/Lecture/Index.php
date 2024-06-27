@@ -72,7 +72,7 @@ class Index extends Component
             ->map(function ($course) {
                 return [
                     'value' => $course->id,
-                    'title' => "($course->code) " . $course->name,
+                    'title' => "($course->code) " . $course->name . " | " . $course->credit . " " . __('CC') . " | " . __(':semester Semester', ['semester' => $course->semester])
                 ];
             })->toArray();
 
