@@ -134,6 +134,21 @@ class WaHelper
                 . "Pesan : *" . $payload['message'] . "*\n\n"
                 . "Silahkan periksa kembali Kartu Rencana Studi yang telah kamu ajukan. Jika ada revisi, harap segera merubahnya dan mengirimkan Kartu Rencana Studi (KRS) kembali.\n"
                 . route('student.submission');
+        } else if ($whatTemplate == 'create_payment') {
+            $template =  "Seorang Mahasiswa mengirimkan bukti pembayaran.\n\n"
+                . "NPM : *" . $payload['npm'] . "*\n"
+                . "Nama Lengkap : *" . $payload['name'] . "*\n"
+                . "Semester : *" . $payload['semester'] . "*\n\n"
+                . "Silahkan konfirmasi pembayaran Mahasiswa yang bersangkutan melalui link di bawah ini.\n"
+                . route('staff.payment', ['search' => $payload['npm']]);
+        } else if ($whatTemplate == 'payment_confirm') {
+            $template =  "Pembayaran kamu telah dikonfirmasi.\n\n"
+                . "NPM : *" . $payload['npm'] . "*\n"
+                . "Nama Lengkap : *" . $payload['name'] . "*\n"
+                . "Semester : *" . $payload['semester'] . "*\n"
+                . "Status : *" . $payload['status'] . "*\n"
+                . "Harap periksa status pembayaran kamu. Apabila ada kesalahan, kamu dapat menghubungi Administrator.\n"
+                . route('home');
         }
 
         $footer = "\n\n\n_Pesan ini dikirimkan secara otomatis oleh Bot WA " . GeneralHelper::appName() . " Prodi Ilmu Komputer UGN. Mohon untuk tidak membalas pesan ini._";

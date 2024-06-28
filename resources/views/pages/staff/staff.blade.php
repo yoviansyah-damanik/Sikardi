@@ -8,6 +8,7 @@
         ])" block wire:model.live.debounce.750ms='search' />
         <x-button color="primary" icon="i-ph-plus"
             x-on:click="$dispatch('toggle-create-staff-modal')">{{ __('Add :add', ['add' => __('Staff')]) }}</x-button>
+        <x-button wire:click='download' color="primary" icon="i-ph-download">{{ __('Download') }}</x-button>
     </div>
 
     <div class="flex flex-col gap-3 sm:hidden">
@@ -17,6 +18,7 @@
         ])" block wire:model.live.debounce.750ms='search' />
         <x-button block color="primary" icon="i-ph-plus"
             x-on:click="$dispatch('toggle-create-staff-modal')">{{ __('Add :add', ['add' => __('Staff')]) }}</x-button>
+        <x-button block wire:click='download' color="primary" icon="i-ph-download">{{ __('Download') }}</x-button>
     </div>
 
 

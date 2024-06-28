@@ -6,11 +6,13 @@ use Livewire\Component;
 use App\Models\Register;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
+use App\Helpers\DownloadHelper;
 use App\Repository\StudentRepository;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Student extends Component
 {
-    use WithPagination;
+    use WithPagination, LivewireAlert;
 
     protected $listeners = [
         'refreshStudents' => '$refresh',
@@ -83,5 +85,28 @@ class Student extends Component
     public function setViewActive($viewActive)
     {
         $this->viewActive = $viewActive;
+    }
+
+    public function download()
+    {
+        try {
+            $students = StudentRepository::getAll(passType: 'not_yet_passed');
+
+            if (!count($students)) {
+                $this->alert('error', __('No :data found.', ['data' => __('Student')]));
+                return;
+            }
+            return DownloadHelper::downloadPdf(
+                'all-students',
+                [
+                    'students' => $students,
+                ],
+                __(':data Data', ['data' => __('All Students')]) . ' ' . \Carbon\Carbon::now()->year
+            );
+        } catch (\Exception $e) {
+            $this->alert('error', __('Something went wrong'), ['text' => $e->getMessage()]);
+        } catch (\Throwable $e) {
+            $this->alert('error', __('Something went wrong'), ['text' => $e->getMessage()]);
+        }
     }
 }

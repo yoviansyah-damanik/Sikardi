@@ -13,5 +13,7 @@
         <x-box :color="$colors[rand(0, count($colors) - 1)]" icon="i-ph-notebook" :to="route('staff.course')" :title="__(':total Total', ['total' => __('Courses')])" :number="$courses"></x-box>
         <x-box :color="$colors[rand(0, count($colors) - 1)]" icon="i-ph-clock-user" :to="route('staff.lecture')" :title="__(':total Total', ['total' => __('Lectures')])"
             :number="$lectures"></x-box>
+        <x-box :color="$colors[rand(0, count($colors) - 1)]" icon="i-ph-money-wavy" :to="route('staff.payment')" :title="__(':total Total', ['total' => __('Payments')])"
+            :number="$lectures"></x-box>
     </x-box-grid>
 </x-content>

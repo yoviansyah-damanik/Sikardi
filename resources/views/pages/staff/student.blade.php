@@ -6,12 +6,14 @@
         <x-form.select :items="$activationTypes" wire:model.live='activationType' :loading="$viewActive != 'registered_students'" />
         <x-button color="primary" icon="i-ph-plus"
             x-on:click="$dispatch('toggle-create-student-modal')">{{ __('Add :add', ['add' => __('Student')]) }}</x-button>
+        <x-button wire:click='download' color="primary" icon="i-ph-download">{{ __('Download') }}</x-button>
     </div>
     <div class="flex flex-col gap-3 sm:hidden">
         <x-form.input block type="search" :placeholder="__('Search by :1 or :2', ['1' => 'NPM', '2' => __(':name Name', ['name' => __('Student')])])" block wire:model.live.debounce.750ms='search' />
         <x-form.select block :items="$activationTypes" wire:model.live='activationType' :loading="$viewActive != 'registered_students'" />
         <x-button block color="primary" icon="i-ph-plus"
             x-on:click="$dispatch('toggle-create-student-modal')">{{ __('Add :add', ['add' => __('Student')]) }}</x-button>
+        <x-button block wire:click='download' color="primary" icon="i-ph-download">{{ __('Download') }}</x-button>
     </div>
 
     <div>

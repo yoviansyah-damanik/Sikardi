@@ -5,10 +5,12 @@ namespace App\Livewire\Staff;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
+use App\Helpers\DownloadHelper;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Lecturer extends Component
 {
-    use WithPagination;
+    use WithPagination, LivewireAlert;
 
     protected $listeners = [
         'refreshLecturers' => '$refresh',
@@ -66,5 +68,28 @@ class Lecturer extends Component
     public function setSearch($search)
     {
         $this->search = $search;
+    }
+
+    public function download()
+    {
+        try {
+            $lecturers = \App\Models\Lecturer::all();
+
+            if (!count($lecturers)) {
+                $this->alert('error', __('No :data found.', ['data' => __('Lecturer')]));
+                return;
+            }
+            return DownloadHelper::downloadPdf(
+                'all-lecturers',
+                [
+                    'lecturers' => $lecturers,
+                ],
+                __(':data Data', ['data' => __('All Lecturers')]) . ' ' . \Carbon\Carbon::now()->year
+            );
+        } catch (\Exception $e) {
+            $this->alert('error', __('Something went wrong'), ['text' => $e->getMessage()]);
+        } catch (\Throwable $e) {
+            $this->alert('error', __('Something went wrong'), ['text' => $e->getMessage()]);
+        }
     }
 }

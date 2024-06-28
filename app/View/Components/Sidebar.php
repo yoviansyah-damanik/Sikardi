@@ -89,6 +89,12 @@ class Sidebar extends Component
                     'isActive' => request()->routeIs('student.submission')
                 ],
                 [
+                    'title' => __('Payment'),
+                    'icon' => 'i-ph-money-wavy',
+                    'to' => route('student.payment'),
+                    'isActive' => request()->routeIs('student.payment')
+                ],
+                [
                     'title' => __('Course Selection Sheet (CSS)'),
                     'icon' => 'i-ph-list-heart',
                     'to' => route('student.course-selection-sheet'),
@@ -121,16 +127,16 @@ class Sidebar extends Component
         if (auth()->user()->role == 'staff')
             $menu_group[] = [
                 [
+                    'title' => __('Payment'),
+                    'icon' => 'i-ph-money-wavy',
+                    'to' => route('staff.payment'),
+                    'isActive' => request()->routeIs('staff.payment')
+                ],
+                [
                     'title' => __('Users'),
                     'icon' => 'i-ph-users-three',
                     'to' => route('users'),
                     'isActive' => request()->routeIs('users')
-                ],
-                [
-                    'title' => __('Report'),
-                    'icon' => 'i-ph-newspaper',
-                    'to' => route('staff.report'),
-                    'isActive' => request()->routeIs('staff.report')
                 ],
                 [
                     'title' => __('Configuration'),

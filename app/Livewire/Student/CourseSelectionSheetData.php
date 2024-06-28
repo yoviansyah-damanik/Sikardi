@@ -4,7 +4,6 @@ namespace App\Livewire\Student;
 
 use App\Helpers\DownloadHelper;
 use Livewire\Component;
-use Barryvdh\DomPDF\Facade\PDF;
 use Livewire\Attributes\Reactive;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 

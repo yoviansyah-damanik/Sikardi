@@ -12,6 +12,7 @@ use Livewire\Component;
 use App\Models\Lecturer;
 use App\Models\Register;
 use App\Models\Curriculum;
+use App\Models\Payment;
 use App\Repository\StudentRepository;
 use App\Repository\LecturerRepository;
 
@@ -69,7 +70,6 @@ class Home extends Component
         $activeStudents = auth()->user()->data->students()->whereDoesntHave('passed')->count();
 
         $schedules = LecturerRepository::getTodaysSchedule(auth()->user()->data);
-
         return view('pages.home.lecturer', [
             'guidancesStudent' => $guidancesStudent,
             'studentsPassed' => $studentsPassed,
@@ -93,6 +93,7 @@ class Home extends Component
         $studentsNotRegistered = Register::count();
         $staff = Staff::count();
         $lecturers = Lecturer::count();
+        $payments = Payment::count();
 
         return view('pages.home.staff', [
             'allStudents' => $allStudents,
@@ -104,6 +105,7 @@ class Home extends Component
             'rooms' => $rooms,
             'courses' => $courses,
             'lectures' => $lectures,
+            'payments' => $payments,
             'curricula' => $curricula,
         ])->title(__('Home'));
     }

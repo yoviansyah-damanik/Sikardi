@@ -94,4 +94,9 @@ class Student extends Model
     {
         return $this->hasOne(StudentPassed::class);
     }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

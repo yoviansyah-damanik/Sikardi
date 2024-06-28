@@ -9,7 +9,7 @@ class DownloadHelper
     public static function downloadPdf(String $view, array $payload, String $filename, String $paper = 'A4', String $orientation = 'landscape')
     {
         try {
-            $pdf = PDF::loadView('print.' . $view, $payload)
+            $pdf = PDF::loadView('download.' . $view, $payload)
                 ->setPaper($paper, $orientation)
                 ->output();
 

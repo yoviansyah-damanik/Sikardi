@@ -33,7 +33,6 @@ class LecturerRepository
                     'limit' => $item->limit,
                     'day_code' => $item->day,
                     'day' => __(DayChoice::getName($item->day)->value),
-                    'type' => $item->type,
                     'start_time' => Str::substr($item->start_time, 0, 5),
                     'end_time' => Str::substr($item->end_time, 0, 5),
                     'course_code' => $item->course->code,
@@ -45,10 +44,7 @@ class LecturerRepository
                     'lecturer' => $item->lecturer->name,
                     'cc' => $item->course->credit,
                     'student_total' =>  $item->css->count() ? $item->css->filter(function ($css_) {
-                        return $css_->css->where([[
-                            'status' => CssStatus::approved->name,
-                            'year' => \Carbon\Carbon::now()->year
-                        ]]);
+                        return $css_->css->status == CssStatus::approved->name && $css_->css->year == \Carbon\Carbon::now()->year;
                     })->count() : 0
                 ];
             })

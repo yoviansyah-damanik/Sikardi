@@ -31,6 +31,7 @@ class StudentRepository implements StudentInterface
     const WITH = [
         'user',
         'supervisor',
+        'payment',
         'css',
         'css.responsibleLecturer',
         'css.details',
@@ -159,6 +160,7 @@ class StudentRepository implements StudentInterface
                 'data' => $isPassed ? $isPassed->only('gpa', 'semester', 'year') : null
             ],
             'course_selection_sheets' => static::getCss($student),
+            'payments' => static::getPayments($student),
             'status' => isset($student->cssNow) ? $student->cssNow->status : 'not_yet',
         ];
     }
@@ -191,6 +193,22 @@ class StudentRepository implements StudentInterface
                     ? (new static)->cssMapping($student->css->where('semester', $semester)->where('status', CssStatus::approved->name)->first())
                     :
                     []
+            ];
+        }
+
+        return $result;
+    }
+
+    public function getPayments(Student $student)
+    {
+        $result = [];
+        foreach (range(1, $student->semester) as $semester) {
+            $payment = $student->payments->where('semester', $semester)->first();
+
+            $result[] = [
+                'semester' => $semester,
+                'status' => $payment ? $payment->status : 'not_paid',
+                'file_url' => $payment ? $payment->file_url : null
             ];
         }
 

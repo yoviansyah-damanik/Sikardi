@@ -6,6 +6,7 @@
         <x-form.select :items="$activationTypes" wire:model.live='activationType' />
         <x-button color="primary" icon="i-ph-plus"
             x-on:click="$dispatch('toggle-create-lecturer-modal')">{{ __('Add :add', ['add' => __('Lecturer')]) }}</x-button>
+        <x-button wire:click='download' color="primary" icon="i-ph-download">{{ __('Download') }}</x-button>
     </div>
 
     <div class="flex flex-col gap-3 sm:hidden">
@@ -13,6 +14,7 @@
         <x-form.select block :items="$activationTypes" wire:model.live='activationType' />
         <x-button block color="primary" icon="i-ph-plus"
             x-on:click="$dispatch('toggle-create-lecturer-modal')">{{ __('Add :add', ['add' => __('Lecturer')]) }}</x-button>
+        <x-button block wire:click='download' color="primary" icon="i-ph-download">{{ __('Download') }}</x-button>
     </div>
 
     <x-table :columns="[

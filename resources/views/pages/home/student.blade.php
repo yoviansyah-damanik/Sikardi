@@ -9,6 +9,16 @@
             {{ __(Str::headline(!empty($student['submission']) ? $student['submission']['status'] : 'not_yet')) }}
         </strong>
     </x-alert>
+    <x-alert :type="$student['payments'][$student['data']['semester'] - 1]['status'] == 'paid'
+        ? 'success'
+        : ($student['payments'][$student['data']['semester'] - 1]['status'] == 'waiting'
+            ? 'warning'
+            : 'error')">
+        {{ __(':status Status', ['status' => __('Payment')]) }}:
+        <strong>
+            {{ __(Str::headline($student['payments'][$student['data']['semester'] - 1]['status'])) }}
+        </strong>
+    </x-alert>
 
     <div class="p-6 bg-white shadow dark:bg-slate-800 sm:p-8">
         <div class="text-xl font-bold text-center uppercase text-primary-700 dark:text-primary-300">

@@ -27,7 +27,8 @@ Route::middleware('auth')
                     ->name('lecturer');
                 Route::get('/staff', \App\Livewire\Staff\Staff::class)
                     ->name('staff');
-
+                Route::get('/payment', \App\Livewire\Staff\Payment\Index::class)
+                    ->name('payment');
                 Route::get('/curriculum', \App\Livewire\Staff\Curriculum\Index::class)
                     ->name('curriculum');
                 Route::get('/course', \App\Livewire\Staff\Course\Index::class)
@@ -36,10 +37,6 @@ Route::middleware('auth')
                     ->name('room');
                 Route::get('/lecture', \App\Livewire\Staff\Lecture\Index::class)
                     ->name('lecture');
-
-                Route::get('/report', \App\Livewire\Staff\Report::class)
-                    ->name('report');
-
                 Route::get('/configuration', \App\Livewire\Staff\Configuration::class)
                     ->name('configuration');
             });
@@ -53,10 +50,8 @@ Route::middleware('auth')
                     ->name('student');
                 Route::get('/schedule', \App\Livewire\Lecturer\Schedule::class)
                     ->name('schedule');
-
                 Route::get('/student-submission', \App\Livewire\Lecturer\StudentSubmission::class)
                     ->name('student-submission');
-
                 Route::get('/student-submission/{student:id}', \App\Livewire\Lecturer\Approval::class)
                     ->name('student-submission.approval');
             });
@@ -69,9 +64,10 @@ Route::middleware('auth')
                 Route::get('/submission', \App\Livewire\Student\Submission::class)
                     ->middleware('studentCheck')
                     ->name('submission');
-
                 Route::get('/course-selection-sheet', \App\Livewire\Student\CourseSelectionSheet::class)
                     ->name('course-selection-sheet');
+                Route::get('/payment', \App\Livewire\Student\Payment\Index::class)
+                    ->name('payment');
             });
 
         Route::get('/users', \App\Livewire\Users\Index::class)
