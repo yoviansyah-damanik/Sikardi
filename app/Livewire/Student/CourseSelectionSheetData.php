@@ -23,11 +23,15 @@ class CourseSelectionSheetData extends Component
 
     public function render()
     {
-        $course_selection_sheet = collect($this->student['course_selection_sheets'])
+        $courseSelectionSheet = collect($this->student['course_selection_sheets'])
             ->where('semester', $this->semester)
             ->first()['data'];
 
-        return view('pages.student.course-selection-sheet-data', compact('course_selection_sheet'));
+        $paymentStatus = collect($this->student['payments'])
+            ->where('semester', $this->semester)
+            ->first()['status'];
+
+        return view('pages.student.course-selection-sheet-data', compact('courseSelectionSheet', 'paymentStatus'));
     }
 
     public function download()

@@ -31,7 +31,7 @@ class StudentRepository implements StudentInterface
     const WITH = [
         'user',
         'supervisor',
-        'payment',
+        'payments',
         'css',
         'css.responsibleLecturer',
         'css.details',
@@ -138,7 +138,6 @@ class StudentRepository implements StudentInterface
     {
         $isPassed = $student?->passed;
 
-        $rand = rand(0, 2);
         return [
             'data' => [
                 'npm' => $student->id,
@@ -161,7 +160,7 @@ class StudentRepository implements StudentInterface
             ],
             'course_selection_sheets' => static::getCss($student),
             'payments' => static::getPayments($student),
-            'status' => isset($student->cssNow) ? $student->cssNow->status : 'not_yet',
+            'status' => !empty($student->cssNow) ? $student->cssNow->status : 'not_yet',
         ];
     }
 
@@ -189,8 +188,8 @@ class StudentRepository implements StudentInterface
         foreach (range(1, $student->semester) as $semester) {
             $result[] = [
                 'semester' => $semester,
-                'data' => $student?->css->where('semester', $semester)->where('status', CssStatus::approved->name)->first()
-                    ? (new static)->cssMapping($student->css->where('semester', $semester)->where('status', CssStatus::approved->name)->first())
+                'data' => $student?->css->where('semester', $semester)->first()
+                    ? (new static)->cssMapping($student->css->where('semester', $semester)->first())
                     :
                     []
             ];

@@ -5,7 +5,6 @@ namespace App\Livewire\Staff\Course;
 use App\Models\Course;
 use Livewire\Component;
 use App\Models\Curriculum;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 

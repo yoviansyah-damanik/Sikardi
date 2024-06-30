@@ -99,7 +99,9 @@
                             ? 'success'
                             : ($student['status'] == 'waiting'
                                 ? 'warning'
-                                : 'error')">
+                                : ($student['status'] == 'revision'
+                                    ? 'info'
+                                    : 'error'))">
                             {{ __(Str::headline($student['status'])) }}
                         </x-badge>
                     </div>
@@ -119,7 +121,7 @@
                         {{ __(':status Status', ['status' => __('Passed')]) }}
                     </div>
                     <div class="flex-1">
-                        <x-badge :type="$student['is_passed']['status'] ? 'success' : 'warning'">
+                        <x-badge :type="$student['is_passed']['status'] ? 'success' : 'error'">
                             {{ $student['is_passed']['message'] }}
                         </x-badge>
                     </div>

@@ -2,11 +2,13 @@
     <x-alert :type="!empty($student['submission'])
         ? ($student['submission']['status'] == 'approved'
             ? 'success'
-            : 'warning')
+            : ($student['submission']['status'] == 'waiting'
+                ? 'warning'
+                : 'info'))
         : 'error'">
         {{ __(':status Status', ['status' => __('Course Selection Sheet (CSS)')]) }}:
         <strong>
-            {{ __(Str::headline(!empty($student['submission']) ? $student['submission']['status'] : 'not_yet')) }}
+            {{ !empty($student['submission']) ? __(Str::headline($student['submission']['status'])) : __('Not yet submitted') }}
         </strong>
     </x-alert>
     <x-alert :type="$student['payments'][$student['data']['semester'] - 1]['status'] == 'paid'

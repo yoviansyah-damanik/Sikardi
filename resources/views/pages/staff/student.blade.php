@@ -86,7 +86,9 @@
                                 ? 'success'
                                 : ($student['status'] == 'waiting'
                                     ? 'warning'
-                                    : 'error')">
+                                    : ($student['status'] == 'revision'
+                                        ? 'info'
+                                        : 'error'))">
                                 {{ __(Str::headline($student['status'])) }}
                             </x-badge>
                         </x-table.td>
@@ -111,7 +113,7 @@
                             <x-tooltip :title="__('View :view', ['view' => __('CSS')])">
                                 <x-button color="yellow" icon="i-ph-list-heart" size="sm"
                                     x-on:click="$dispatch('toggle-show-student-css-modal')"
-                                    wire:click="$dispatch('setStudent', { student: '{{ $student['data']['npm'] }}' } )">
+                                    wire:click="$dispatch('setCssStudent', { student: '{{ $student['data']['npm'] }}' } )">
                                 </x-button>
                             </x-tooltip>
                             <x-tooltip :title="__('Activation Menu')">
@@ -251,7 +253,7 @@
                             <x-tooltip :title="__('View :view', ['view' => __('CSS')])">
                                 <x-button color="yellow" icon="i-ph-list-heart" size="sm"
                                     x-on:click="$dispatch('toggle-show-student-css-modal')"
-                                    wire:click="$dispatch('setStudent', { student: '{{ $student['data']['npm'] }}' } )">
+                                    wire:click="$dispatch('setCssStudent', { student: '{{ $student['data']['npm'] }}' } )">
                                 </x-button>
                             </x-tooltip>
                             <x-tooltip :title="__('Activation Menu')">

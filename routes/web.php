@@ -70,6 +70,9 @@ Route::middleware('auth')
                     ->name('payment');
             });
 
+        Route::get('/courses', \App\Livewire\Courses::class)
+            ->name('courses');
+
         Route::get('/users', \App\Livewire\Users\Index::class)
             ->name('users');
 

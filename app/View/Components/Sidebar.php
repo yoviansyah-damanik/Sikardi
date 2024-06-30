@@ -148,6 +148,12 @@ class Sidebar extends Component
 
         $menu_group[] = [
             [
+                'title' => __('Courses'),
+                'icon' => 'i-ph-list-star',
+                'to' => route('courses'),
+                'isActive' => request()->routeIs('courses')
+            ],
+            [
                 'title' => __('Account'),
                 'icon' => 'i-ph-user',
                 'to' => route('account'),

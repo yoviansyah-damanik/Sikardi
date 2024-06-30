@@ -9,7 +9,7 @@ class ShowDataCss extends Component
 {
     public $student;
 
-    protected $listeners = ['setStudent', 'clearModal'];
+    protected $listeners = ['setCssStudent', 'clearModal'];
 
     public array $semesters;
     public int $semester;
@@ -21,7 +21,7 @@ class ShowDataCss extends Component
         return view('pages.student.show-data-css');
     }
 
-    public function setStudent($student)
+    public function setCssStudent($student)
     {
         $this->isLoading = true;
         $this->reset('student', 'semester', 'semesters');

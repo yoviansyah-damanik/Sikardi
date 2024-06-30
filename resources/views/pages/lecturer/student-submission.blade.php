@@ -39,7 +39,9 @@
                             ? 'success'
                             : ($student['status'] == 'waiting'
                                 ? 'warning'
-                                : 'error')">
+                                : ($student['status'] == 'revision'
+                                    ? 'info'
+                                    : 'error'))">
                             {{ __(Str::headline($student['status'])) }}
                         </x-badge>
                     </x-table.td>
