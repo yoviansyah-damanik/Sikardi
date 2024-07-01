@@ -79,13 +79,21 @@ class Lecturer extends Component
                 $this->alert('error', __('No :data found.', ['data' => __('Lecturer')]));
                 return;
             }
-            return DownloadHelper::downloadPdf(
+
+            $download = DownloadHelper::downloadPdf(
                 'all-lecturers',
                 [
                     'lecturers' => $lecturers,
                 ],
                 __(':data Data', ['data' => __('All Lecturers')]) . ' ' . \Carbon\Carbon::now()->year
             );
+
+            if (is_string($download)) {
+                $this->alert('warning', $download);
+                return;
+            }
+
+            return $download;
         } catch (\Exception $e) {
             $this->alert('error', __('Something went wrong'), ['text' => $e->getMessage()]);
         } catch (\Throwable $e) {

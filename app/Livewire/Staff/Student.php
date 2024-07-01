@@ -96,13 +96,21 @@ class Student extends Component
                 $this->alert('error', __('No :data found.', ['data' => __('Student')]));
                 return;
             }
-            return DownloadHelper::downloadPdf(
+
+            $download = DownloadHelper::downloadPdf(
                 'all-students',
                 [
                     'students' => $students,
                 ],
                 __(':data Data', ['data' => __('All Students')]) . ' ' . \Carbon\Carbon::now()->year
             );
+
+            if (is_string($download)) {
+                $this->alert('warning', $download);
+                return;
+            }
+
+            return $download;
         } catch (\Exception $e) {
             $this->alert('error', __('Something went wrong'), ['text' => $e->getMessage()]);
         } catch (\Throwable $e) {
