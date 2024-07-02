@@ -100,6 +100,7 @@ class Create extends Component
             $this->dispatch('setSearch', $this->name);
             $this->dispatch('setViewActive', 'student_registration');
             $this->dispatch('toggle-create-student-modal');
+            $this->reset();
             $this->alert('success', __('Successfully'), ['text' => __(':attribute created successfully.', ['attribute' => __('Student')])]);
         } catch (\Exception $e) {
             DB::rollBack();
