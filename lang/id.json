@@ -1,7 +1,7 @@
 {
     ":Attribute must contain between :min to :max characters.": ":Attribute harus berisi antara :min sampai :max karakter.",
     ":attribute approved successfully.": ":attribute berhasil disetujui.",
-    ":attribute created successfully.": ":attribute berhasil dibuat.",
+    ":attribute created successfully.": ":attribute berhasil ditambahkan.",
     ":attribute deleted successfully.": ":attribute berhasil dihapus.",
     ":attribute rejected successfully.": ":attribute berhasil ditolak.",
     ":attribute revised successfully.": ":attribute berhasil direvisi.",
