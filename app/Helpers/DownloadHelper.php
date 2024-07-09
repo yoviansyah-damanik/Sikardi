@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DownloadHelper
 {
