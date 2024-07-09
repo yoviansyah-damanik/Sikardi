@@ -80,8 +80,9 @@ class GeneralHelper
         $start = Carbon::createFromFormat('d-m', static::get('odd_semester'))->startOfDay();
         $end = Carbon::createFromFormat('d-m', static::get('even_semester'))->addDays(-1)->endOfDay();
 
-        if ($now->isBefore($start)) return 'even';
+        if ($now->isAfter($end)) return 'even';
         if ($now->isBetween($start, $end)) return 'odd';
+        return 'unknown';
     }
 
     public static function semester(int $stamp)
