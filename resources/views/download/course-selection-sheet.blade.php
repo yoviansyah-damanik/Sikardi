@@ -8,13 +8,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
         html {
-            font-size: 11pt;
+            font-size: 10pt;
             font-family: "Times New Roman";
             margin: 1cm;
         }
 
         h1 {
-            font-size: 13pt;
+            font-size: 12pt;
             font-weight: 700;
         }
 
