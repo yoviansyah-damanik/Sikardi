@@ -69,7 +69,6 @@ class Lecturer extends Component
         DB::beginTransaction();
         try {
             auth()->user()->data->update([
-                'id' => $this->nidn,
                 'name' => $this->name,
                 'gender' => $this->gender,
                 'phone_number' => $this->phoneNumber,
