@@ -44,7 +44,6 @@ class Courses extends Component
             ->whereAny(['code', 'name'], 'like', $this->search . '%')
             ->orderBy('semester', 'asc')
             ->orderBy('name', 'asc')
-            ->groupBy('semester')
             ->get();
 
         return view('pages.courses', compact('courses'))
