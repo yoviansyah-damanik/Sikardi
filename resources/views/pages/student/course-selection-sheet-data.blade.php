@@ -47,12 +47,30 @@
                 @endif
             </div>
             @if (!empty($courseSelectionSheet['details']) && $courseSelectionSheet['status'] == 'approved')
-                <div class="hidden sm:block">
-                    <x-button wire:click='download' color="primary" icon="i-ph-download">{{ __('Download') }}</x-button>
-                </div>
-                <div class="block sm:hidden">
-                    <x-button block wire:click='download' color="primary"
-                        icon="i-ph-download">{{ __('Download') }}</x-button>
+                <div class="lg:w-64">
+                    <div class="hidden sm:block">
+                        <x-button wire:click='download' color="primary"
+                            icon="i-ph-download">{{ __('Download') }}</x-button>
+                    </div>
+                    <div class="block sm:hidden">
+                        <x-button block wire:click='download' color="primary"
+                            icon="i-ph-download">{{ __('Download') }}</x-button>
+                    </div>
+
+                    @if (auth()->user()->role == 'staff')
+                        <div class="mt-3">
+                            <div class="hidden sm:block">
+                                <x-button wire:click='delete' color="red"
+                                    icon="i-ph-trash">{{ __('Delete') }}</x-button>
+                            </div>
+                            <div class="block sm:hidden">
+                                <x-button block wire:click='delete' color="red"
+                                    icon="i-ph-trash">{{ __('Delete') }}</x-button>
+                            </div>
+                            <x-form.checkbox wrapClass="mt-3" :label="__('Approve delete CSS')"
+                                error="{{ $errors->first('approveDelete') }}" wire:model='approveDelete' />
+                        </div>
+                    @endif
                 </div>
             @endif
         </div>

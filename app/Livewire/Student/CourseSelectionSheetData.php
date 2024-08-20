@@ -2,18 +2,25 @@
 
 namespace App\Livewire\Student;
 
-use App\Helpers\DownloadHelper;
 use Livewire\Component;
+use App\Helpers\DownloadHelper;
 use Livewire\Attributes\Reactive;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class CourseSelectionSheetData extends Component
 {
     use LivewireAlert;
+    public $cssId;
     public $student;
+    public $approveDelete;
+    public $courseSelectionSheet;
+    public $paymentStatus;
 
     #[Reactive]
     public int $semester = 1;
+
+    protected $listeners = ['clearModal'];
 
     public function mount($student, ?int $semester = null)
     {
@@ -23,15 +30,16 @@ class CourseSelectionSheetData extends Component
 
     public function render()
     {
-        $courseSelectionSheet = collect($this->student['course_selection_sheets'])
+        $this->courseSelectionSheet = collect($this->student['course_selection_sheets'])
             ->where('semester', $this->semester)
             ->first()['data'];
-
-        $paymentStatus = collect($this->student['payments'])
+        $this->paymentStatus = collect($this->student['payments'])
             ->where('semester', $this->semester)
             ->first()['status'];
 
-        return view('pages.student.course-selection-sheet-data', compact('courseSelectionSheet', 'paymentStatus'));
+        $this->cssId = $this->courseSelectionSheet['id'] ?? null;
+
+        return view('pages.student.course-selection-sheet-data');
     }
 
     public function download()
@@ -50,6 +58,42 @@ class CourseSelectionSheetData extends Component
         } catch (\Exception $e) {
             $this->alert('error', __('Something went wrong'), ['text' => $e->getMessage()]);
         } catch (\Throwable $e) {
+            $this->alert('error', __('Something went wrong'), ['text' => $e->getMessage()]);
+        }
+    }
+
+    public function clearModal()
+    {
+        $this->reset([
+            'student',
+            'courseSelectionSheet',
+            'paymentStatus',
+            'cssId',
+        ]);
+    }
+
+    public function delete()
+    {
+        $this->validate([
+            'approveDelete' => 'accepted'
+        ], [], [
+            'approveDelete' => __('Approve delete CSS')
+        ]);
+
+        DB::beginTransaction();
+        try {
+            \App\Models\CourseSelectionSheet::whereId($this->cssId)
+                ->delete();
+
+            DB::commit();
+            $this->dispatch('toggle-show-student-css-modal');
+            $this->dispatch('refreshStudents');
+            $this->alert('success', __('Successfully'), ['text' => $this->cssId . ' ' . __(':attribute deleted successfully.', ['attribute' => __('Course Selection Sheet')])]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $this->alert('error', __('Something went wrong'), ['text' => $e->getMessage()]);
+        } catch (\Throwable $e) {
+            DB::rollBack();
             $this->alert('error', __('Something went wrong'), ['text' => $e->getMessage()]);
         }
     }

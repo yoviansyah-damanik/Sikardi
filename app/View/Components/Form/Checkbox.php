@@ -44,10 +44,11 @@ class Checkbox extends Component
         $this->wrapClass = join(' ', [
             'items-center gap-2',
             $inline ? 'inline-flex mr-3 last:mr-0' : 'flex',
+            $wrapClass
         ]);
 
         $this->errorClass = join(' ', [
-            'mt-1 text-sm text-red-500 ms-4',
+            'block mt-1 text-sm text-red-500 ms-4',
             $errorClass
         ]);
     }
