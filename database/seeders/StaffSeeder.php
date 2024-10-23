@@ -24,7 +24,7 @@ class StaffSeeder extends Seeder
         $staff = Staff::create([
             'id' => '1234567890',
             'name' => 'Administrator',
-            'phone_number' => '081222778197'
+            'phone_number' => '123456789'
         ]);
 
         $userType = new UserType(['user_id' => $user->id]);
